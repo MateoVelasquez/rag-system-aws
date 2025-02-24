@@ -2,7 +2,10 @@
 import os
 from pathlib import Path
 
+from dotenv import find_dotenv, load_dotenv
 from pydantic_settings import BaseSettings
+
+load_dotenv(find_dotenv())
 
 DOCS_URL = "/docs"
 
@@ -63,10 +66,10 @@ class DevSettings(DefaultSettings):
     # ENV CONFIG
     ENV_STATE: str = "dev"
     DEBUG_MODE: bool = True
-    # ORM CONFIG
-    SQLALCHEMY_ECHO: bool = False
     # DOCS
     DOCS_URL: str | None = DOCS_URL
+    # MODEL
+    LLM_MODEL: str = "qwen2.5:0.5b"
 
 
 def get_settings() -> BaseSettings:

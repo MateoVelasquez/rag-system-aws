@@ -6,16 +6,19 @@ from fastapi import APIRouter, Depends, HTTPException
 
 from ..config import settings
 from ..services.rag_pipeline import RAGPipeline
-from .schemas import ResponseSchema
+from .schemas import QuerySchema, ResponseSchema
 
-app_routes = APIRouter(tags=['auth'])
+app_routes = APIRouter(tags=['RAG'])
 
-@app_routes.get('/health-check')
+@app_routes.get('/app_info')
 def get_health_check() -> dict:
     """Return status ok."""
     return {
         "status": "OK",
-        "env_state": settings.ENV_STATE
+        "env_state": settings.ENV_STATE,
+        "llm_model": settings.LLM_MODEL,
+        "developer": 'Mateo Velásquez',
+        "email": 'mateo10velasquez@hotmail.com',
     }
 
 @lru_cache(maxsize=1)
@@ -23,10 +26,15 @@ def get_rag_pipeline() -> RAGPipeline:
     """Singleton of RAGPipeline."""
     return RAGPipeline()
 
-@app_routes.get('/api/ask', response_model=ResponseSchema)
-def get_answer(query: str, rag: Annotated[dict, Depends(get_rag_pipeline)]) -> dict:
+@app_routes.post('/api/ask', response_model=ResponseSchema)
+def get_answer(
+    query: QuerySchema,
+    rag: Annotated[dict, Depends(get_rag_pipeline)]
+) -> dict:
     """Generate the answer using RAG."""
-    if not query:
+    query_dump = query.model_dump()
+    question = query_dump.get('question', None)
+    if not question:
         raise HTTPException(status_code=400, detail="No query was provided.")
-    answer = rag.generate_answer(query)
-    return {"query": query, "answer": answer}
+    answer = rag.generate_answer(question)
+    return {"query": question, "answer": answer}

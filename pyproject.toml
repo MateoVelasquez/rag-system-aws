@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=70.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+# Project settings
+[project]
+name = "rag_system_aws"
+dynamic = ["version", "dependencies"]
+description = "rag system in AWS"  
+readme = "README.md"  
+requires-python = ">=3.12"
+license = { file = "LICENSE" }
+keywords = ["RAG", "WIKI", "AWS"]  
+authors = [
+    { name = "Mateo Velasquez", email = "mateo10velasquez@hotmail.com" }
+]
+maintainers = [
+    { name = "Mateo Velasquez", email = "mateo10velasquez@hotmail.com" }
+]
+
+
+[project.urls]
+"Source" = "https://github.com/MateoVelasquez/rag-system-aws"
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+version = { attr = "app.__version__" }
+
+[tool.setuptools.packages.find]
+include = ["app"]
+exclude = ["*docs*", "*tests*"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.docformatter]
+wrap-summaries = 120
+wrap-descriptions = 120
+in-place = true
+pre-summary-newline = true
+close-quotes-on-newline = true
+
+[tool.codespell]
+ignore-words-list = "crate,nd,strack,dota,ane,segway,fo,gool,winn,commend"
+skip = '*.csv,*venv*,docs/??/,docs/mkdocs_??.yml'
