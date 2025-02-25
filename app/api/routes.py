@@ -2,13 +2,20 @@
 from functools import lru_cache
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request, responses
+from fastapi.templating import Jinja2Templates
 
 from ..config import settings
 from ..services.rag_pipeline import RAGPipeline
 from .schemas import QuerySchema, ResponseSchema
 
 app_routes = APIRouter(tags=['RAG'])
+templates = Jinja2Templates(directory="app/templates")
+
+@app_routes.get("/", response_class=responses.HTMLResponse)
+def home(request: Request) -> None:
+    """Index page."""
+    return templates.TemplateResponse("index.html", {"request": request})
 
 @app_routes.get('/app_info')
 def get_health_check() -> dict:

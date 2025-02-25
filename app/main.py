@@ -1,5 +1,6 @@
 """RAG System app."""
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 
 from . import __version__
 from .api.routes import app_routes
@@ -23,7 +24,10 @@ def create_app() -> FastAPI:
         docs_url=settings.DOCS_URL,
         version=__version__
     )
+    # routers
     register_routers(app)
+    # static
+    app.mount("/static", StaticFiles(directory="app/static", html=True), name="static")
     return app
 
 # APP creation
