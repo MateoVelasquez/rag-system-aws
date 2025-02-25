@@ -13,6 +13,7 @@
 
 - [About the project](#about-the-project)
     - [Built with](#built-with)
+    - [RAG: Tech Specs](#rag-tech-specs)
 - [Getting started](#getting-started)
     - [Installation](#installation)
     - [Folder structure](#folder-structure)
@@ -50,10 +51,9 @@ The Rag System was built with the following technologies:
 
 These technologies were chosen to provide a robust, scalable, and efficient solution.
 
+## RAG Tech Specs
 
-The architecture used for this solution can be appreciated in the next image.
-![RAG System Architecture](./docs/rag_system.png)
-
+For more detailed specifications of the solution, see the file [RAG_Specs](./docs/RAG_Specs.md).
 
 # Getting Started
 
