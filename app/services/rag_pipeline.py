@@ -28,4 +28,4 @@ class RAGPipeline:
         open_search_index = self.retriever.knn_search(
             settings.AWS_OPENSEARCH_INDEX_NAME, embedding_question
         )
-        return self.llm.generate_response(question, open_search_index[0])
+        return self.llm.generate_response(question, " ".join(set(open_search_index)))
