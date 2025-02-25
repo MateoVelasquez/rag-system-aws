@@ -36,9 +36,20 @@ class DefaultSettings(BaseSettings):
 
     # LLM:
     LLM_MODEL: str = "llama3"
-    LLM_PROMPT: str = """Use the following reference information to answer the user's
-        question: {context}
-        Question: {question}
+    LLM_PROMPT: str = """You are an AI assistant specialized in providing accurate
+    and context-aware responses.
+
+    Context:
+    {context}
+
+    Question:
+    {question}
+
+    Instructions:
+    - Answer concisely and directly based on the provided context.
+    - If the context lacks information, indicate it instead of making assumptions.
+    - Use clear and structured language to improve readability.
+
     Answer:"""
 
     # WIKIPEDIA API
