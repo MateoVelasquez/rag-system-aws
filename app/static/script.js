@@ -47,6 +47,7 @@ async function fetchRAGInfo() {
                 <p><strong>LLM Model:</strong> ${data.llm_model}</p>
                 <p><strong>Developer:</strong> ${data.developer}</p>
                 <p><strong>Email:</strong> ${data.email}</p>
+                <p><strong>Project Link:</strong> https://github.com/MateoVelasquez/rag-system-aws</p>
             </div>
         `;
     } catch (error) {
