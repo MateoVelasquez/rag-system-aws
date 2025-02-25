@@ -1,0 +1,10 @@
+fastapi==0.115
+uvicorn==0.34.0
+python-dotenv==1.0.1
+pydantic-settings==2.8.0
+sentence-transformers==3.4.1
+langchain==0.3.19
+langchain-ollama==0.2.3
+opensearch-py==2.8.0
+boto3==1.36.26
+Wikipedia-API==0.8.1

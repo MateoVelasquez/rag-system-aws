@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat con FastAPI</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <h1>ChatBot RAG System</h1>
+    <p class="info-text">In this RAG system, you can inquire about topics related to:</p>
+    <ul class="info-list">
+        <li>FastAPI, ASGI, RESTful API, OAuth, JSON Schema, Swagger (software), OpenAPI, CORS</li>
+        <li>Amazon Web Services: AWS Lambda, Amazon S3, Amazon DynamoDB, Amazon EC2, Amazon SageMaker, OpenSearch</li>
+        <li>Artificial Intelligence & Machine Learning: Machine Learning, Deep Learning, NLP, Transformer architectures</li>
+        <li>Models & Tools: GPT, LLaMA, Mistral AI, Hugging Face, Vector Databases, Embeddings</li>
+    </ul>
+    <p class="info-text2">Please use English:</p>
+    <div id="chatbox" class="chat-container"></div>
+    <div id="loading" class="loading-container">
+        <div class="spinner"></div>
+        <p>Cargando...</p>
+    </div>
+    <input type="text" id="userInput" placeholder="Escribe tu mensaje..." />
+    <button id="sendButton">Enviar</button>
+    
+    <h2>RAG Info</h2>
+    <div id="rag-info"></div>
+    
+    <script src="/static/script.js"></script>
+</body>
+</html>

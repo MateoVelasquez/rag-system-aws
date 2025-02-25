@@ -1,0 +1,102 @@
+indent-width = 4
+line-length = 79
+src = ["."]
+target-version = "py39"
+
+[format]
+docstring-code-format = true
+docstring-code-line-length = 80
+indent-style = "space"
+quote-style = "double"
+skip-magic-trailing-comma = false
+
+[lint]
+# https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules
+ignore = [
+    "W191",
+    "E111",
+    "E114",
+    "E117",
+    "D206",
+    "D300",
+    "Q000",
+    "Q001",
+    "Q002",
+    "Q003",
+    "COM812",
+    "COM819",
+    "ISC001",
+    "ISC002",
+]
+# Fix depend of selected rules
+select = [
+    "F",    # pyflakes
+    "E",    # Code style error pycodestyle
+    "W",    # Code style warning pycodestyle
+    "C90",  # McCabe complexity
+    "I",    # sorting isort style
+    "N",    # Naming
+    "D",    # Style docstring
+    "UP",   # Update python pyupgrade
+    "ANN",  # Annotations
+    "S",    # Security
+    "B",    # find like bugs and design problems
+    "A",    # Builtins
+    "C4",   # Comprehensions
+    "DTZ",  # Datetime tz
+    "EM",   # Error message
+    "LOG",  # Logging
+    "G",    # Looging format
+    "INP",
+    "PIE",
+    "RSE",  # Raises
+    "RET",  # Returns
+    "SIM",  # Simplifications
+    "TC",   # Type checking
+    "ARG",  # Function arguments
+    "PTH",  # Pathib
+    "TD",   # Check TODO
+    "FIX",  # Check FIXME, BUG, HACK
+    "ERA",  # Code commented
+    "PD",   # Pandas
+    "PL",   # PyLint
+    "TRY",  # Tryceratos for try checks
+    "FLY",  # F string concatenation
+    "PERF", # Performance
+    "FURB", # Modernize codebase
+    "DOC",  # Docstrings existence
+    "RUF",  # Ruff own rules
+]
+
+fixable = [
+    "F401",
+    "F632",
+    "F811",
+    "F901",
+    "E401",
+    "E703",
+    "E713",
+    "E714",
+    "E731",
+    "I",
+    "G",
+    "PTH201",
+    "PLC0208",
+    "PLC0414",
+    "PLE0241",
+    "PLR",
+    "FLY002",
+]
+
+task-tags = ["BUG", "FIXME", "HACK", "TODO"]
+
+[lint.isort]
+default-section = "third-party"
+force-sort-within-sections = true
+
+[lint.pycodestyle]
+max-doc-length = 88
+max-line-length = 88
+
+[lint.pydocstyle]
+convention = "google"
