@@ -55,6 +55,8 @@ These technologies were chosen to provide a robust, scalable, and efficient solu
 
 For more detailed specifications of the solution, see the file [RAG_Specs](./docs/RAG_Specs.md).
 
+![architecture](./docs/rag_system.png)
+
 # Getting Started
 
 ## Installation
