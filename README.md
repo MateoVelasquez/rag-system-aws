@@ -82,7 +82,7 @@ To install the Rag System in your machine, follow these steps:
     cp .env_template .env
     ```
     Configure the following required environment variables in your `.env` file:
-    - `ENV_STATE`: Set to 'dev' or 'localdev' to determine the LLM model
+    - `ENV_STATE`: Set to `dev` or `localdev` to determine the deploy environment (`localdev` for local installations)
     - AWS credentials for OpenSearch access:
         - `AWS_ACCESS_KEY_ID`
         - `AWS_SECRET_ACCESS_KEY`
@@ -92,7 +92,7 @@ To install the Rag System in your machine, follow these steps:
         - `AWS_OPENSEARCH_USER`
         - `AWS_OPENSEARCH_PASSWORD`
 
-5. Install Ollama:
+5. Install Ollama (if it's not already installed)
     ```bash
     # For Linux
     curl -fsSL https://ollama.com/install.sh | sh
@@ -171,7 +171,7 @@ To run the Rag System on your local machine, follow these steps:
     uvicorn app.main:app --reload
     ```
 
-**Note:** The application requires a running Ollama instance with the appropriate model (qwen2.5:0.5b for dev or llama3 for localdev). Ensure Ollama is running before starting the application:
+**Note:** The application requires a running Ollama instance with the appropriate model (defined with [config.py](./app/config.py) `LLM_MODEL` variable). Ensure Ollama is running before starting the application:
 ```bash
 ollama serve
 ```
