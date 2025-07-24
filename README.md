@@ -77,6 +77,38 @@ To install the Rag System in your machine, follow these steps:
     ```bash
     pip install .
     ```
+4. Set up your .env variables:
+    ```bash
+    cp .env_template .env
+    ```
+    Configure the following required environment variables in your `.env` file:
+    - `ENV_STATE`: Set to `dev` or `localdev` to determine the deploy environment (`localdev` for local installations)
+    - AWS credentials for OpenSearch access:
+        - `AWS_ACCESS_KEY_ID`
+        - `AWS_SECRET_ACCESS_KEY`
+        - `AWS_DEFAULT_REGION`
+    - OpenSearch connection details:
+        - `AWS_OPENSEARCH_HOST`
+        - `AWS_OPENSEARCH_USER`
+        - `AWS_OPENSEARCH_PASSWORD`
+
+5. Install Ollama (if it's not already installed)
+    ```bash
+    # For Linux
+    curl -fsSL https://ollama.com/install.sh | sh
+    # For MacOS
+    brew install ollama
+    # For Windows
+    # Download from https://ollama.com/download/windows
+    ```
+    
+    After installation, pull the required model based on your `ENV_STATE`:
+    ```bash
+    # For ENV_STATE=dev
+    ollama pull qwen2.5:0.5b
+    # For ENV_STATE=localdev
+    ollama pull llama3
+    ```
 
 ## Folder structure
 The project directory structure is organized as follows:
@@ -118,7 +150,7 @@ The application follows a **FastAPI-based architecture**, structured into distin
 - **`services/`**: Implements core business logic, including retrievers and managers that interact with external systems.  
 - **`utils/`**: Provides utility functions, including routines for loading initial data into S3 and OpenSearch.  
 - **`scripts/`**: Contains scripts designed for execution in **AWS Lambda**, triggered by S3 file uploads.  
-- **`main.py`**: The application’s entry point, responsible for initializing FastAPI and routing requests.  
+- **`main.py`**: The application's entry point, responsible for initializing FastAPI and routing requests.  
 
 This modular structure ensures **clear separation of concerns**, improving maintainability, scalability, and ease of extension. 🚀  
 
@@ -139,8 +171,10 @@ To run the Rag System on your local machine, follow these steps:
     uvicorn app.main:app --reload
     ```
 
-**Note:** Ensure that you have set up the required environment variables as specified in the `.env_template` file and that **Ollama** with **Llama 3** is installed beforehand.  
-
+**Note:** The application requires a running Ollama instance with the appropriate model (defined with [config.py](./app/config.py) `LLM_MODEL` variable). Ensure Ollama is running before starting the application:
+```bash
+ollama serve
+```
 
 ## Docker Deployment:
 
@@ -160,9 +194,15 @@ To run the Rag System on your local machine, follow these steps:
     docker run -p 8000:8000 --name rag-system rag-system-img
     ```
 
-If you have problems with Docker detecting Ollama, use the `--network=host` flag. This allows Docker to run on the same network, enabling it to find the Ollama server.
-If you want to run the server in the background, use the `-d` flag.
+Docker won't detect Ollama by default since it runs in an isolated network. There are two ways to connect Docker to Ollama:
 
+1. Using host network (recommended for development):
+    ```bash
+    docker run --network=host -p 8000:8000 --name rag-system rag-system-img
+    ```
+
+2. Using Docker Compose with a dedicated network (recommended for production):
+    Create a docker-compose.yml file that defines both services and their networking. This approach is pending implementation.
 
 # Usage  
 
